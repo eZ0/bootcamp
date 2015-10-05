@@ -8,6 +8,7 @@ var minify = require('gulp-minify-css');
 var uglify = require('gulp-uglify');
 var gulpif = require('gulp-if');
 var sourcemaps = require('gulp-sourcemaps');
+var eslint = require('gulp-eslint');
 
 
 gulp.task('default', ['sass', 'connect', 'watch']);
@@ -19,6 +20,15 @@ gulp.task('sass', function(){
                .pipe(sass())
                .pipe(sourcemaps.write('./'))
                .pipe(gulp.dest('./styles'));
+});
+
+gulp.task('lint', function(){
+
+    return gulp.src(['./scripts/*.js'])
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
+
 });
 
 
