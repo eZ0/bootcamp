@@ -1,26 +1,24 @@
 var gulp = require('gulp');
-var sass = require('gulp-sass');
-var connect = require('gulp-connect');
+// var sass = require('gulp-sass');
+// var connect = require('gulp-connect');
 var runSequence = require('run-sequence');
 var wiredep = require('wiredep').stream;
 var useref = require('gulp-useref');
 var minify = require('gulp-minify-css');
 var uglify = require('gulp-uglify');
 var gulpif = require('gulp-if');
-var sourcemaps = require('gulp-sourcemaps');
+// var sourcemaps = require('gulp-sourcemaps');
 var eslint = require('gulp-eslint');
+var requireDir = require('require-dir');
 
+// gulp.task('sass', function(){
 
-gulp.task('default', ['sass', 'connect', 'watch']);
-
-gulp.task('sass', function(){
-
-    return gulp.src('./styles/*.scss')
-                .pipe(sourcemaps.init({loadMaps: true}))
-               .pipe(sass())
-               .pipe(sourcemaps.write('./'))
-               .pipe(gulp.dest('./styles'));
-});
+//     return gulp.src('./styles/*.scss')
+//                 .pipe(sourcemaps.init({loadMaps: true}))
+//                .pipe(sass())
+//                .pipe(sourcemaps.write('./'))
+//                .pipe(gulp.dest('./styles'));
+// });
 
 gulp.task('lint', function(){
 
@@ -63,8 +61,14 @@ gulp.task('reload', function(){
                .pipe(connect.reload());
 });
 
-gulp.task('connect', function(){
-    connect.server({
-        livereload: true
-    });
-});
+// gulp.task('connect', function(){
+//     connect.server({
+//         livereload: true
+//     });
+// });
+
+// Require all tasks in the 'gulp' folder.
+
+requireDir('./gulp', { recurse: false });
+
+gulp.task('default', ['sass', 'connect', 'watch']);
