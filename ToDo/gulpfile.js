@@ -34,10 +34,23 @@ gulp.task('scripts', function(){
 });
 
 gulp.task('html', function(){
+    gulp.start('bower');
     var options = {comments:true,spare:true};
     return gulp.src('src/*.html')
             .pipe(minifyHTML(options))
             .pipe(gulp.dest('./dist/'))
+});
+
+gulp.task('watch', function(){
+        gulp.watch('src/js/**/*.js', ['scripts']);
+        gulp.watch('src/sass/**/*.scss', ['styles']);
+        gulp.watch('src/*.html', ['html']);
+});
+
+gulp.task('bower', function () {
+    gulp.src('src/index.html')
+        .pipe(wiredep())
+        .pipe(gulp.dest('./dist'));
 });
 
 

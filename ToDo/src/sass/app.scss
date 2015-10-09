@@ -1,4 +1,5 @@
 $bg_color: #fafafa;
+$gray_color: #353535;
 
 
 html,
@@ -13,7 +14,7 @@ body {
     line-height: 1.5;
     width: auto;
     background: $bg_color;
-    color: #353535;
+    color: $gray_color;
     font-smoothing: antialiased;
 }
 
