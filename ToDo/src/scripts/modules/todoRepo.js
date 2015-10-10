@@ -1,6 +1,6 @@
 var todoRepo = (function(){
 
-      'use strict'
+      // 'use strict'
 
       var todos = [];
 

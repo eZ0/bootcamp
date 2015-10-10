@@ -15,7 +15,14 @@ var util = {
             return uuid;
         },
         pluralize: function (count, word) {
-            return count === 1 ? word : word + 's';
+
+            if ( (count <= 1 ) || (count === '')) {
+                return word;
+            }else{
+                return word + 's';
+            }
+
+            // return count === 1 ? word : word + 's';
         },
         store: function (namespace, data) {
             if (arguments.length > 1) {

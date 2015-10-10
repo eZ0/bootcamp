@@ -12,9 +12,14 @@ describe('util service', function(){
             expect(result).toBe("banana");
         });
 
-        it("should return banana for '' & banana", function() {
-            var result = util.pluralize('',"banana");
+        it("should return banana for -1 banana", function() {
+            var result = util.pluralize(-1, "banana");
             expect(result).toBe("banana");
+        });
+
+        it("should return banana for '' & apple", function() {
+            var result = util.pluralize('',"apple");
+            expect(result).toBe("apple");
         });
 
         it("should return banana for '2' banana", function() {
