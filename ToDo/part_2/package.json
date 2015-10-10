@@ -1,0 +1,30 @@
+{
+  "name": "todo_app",
+  "version": "1.0.0",
+  "description": "refactoring todo app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ksenia Karelskaya",
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.9.10",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-connect": "^2.2.0",
+    "gulp-minify-css": "^1.2.1",
+    "gulp-minify-html": "^1.0.4",
+    "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.4.1",
+    "jasmine-core": "^2.3.4",
+    "karma": "^0.13.10",
+    "karma-chrome-launcher": "^0.2.1",
+    "karma-jasmine": "^0.3.6",
+    "karma-nyan-reporter": "^0.2.2",
+    "karma-phantomjs2-launcher": "^0.3.2",
+    "wiredep": "^2.2.2"
+  },
+  "dependencies": {}
+}
