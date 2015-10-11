@@ -1,6 +1,8 @@
 /*global jQuery, Handlebars, Router */
+'use strict'
+
+
 jQuery(function ($) {
-	'use strict';
 
 	Handlebars.registerHelper('eq', function (a, b, options) {
 		return a === b ? options.fn(this) : options.inverse(this);
@@ -13,9 +15,10 @@ jQuery(function ($) {
 	var App = {
 		init: function () {
 
-			this.todos = util.store('todos-jquery');
+			// this.todos = util.store('todos-jquery');
+            // todoRepo.init();
 
-            todoRepo.init();
+            this.todoRepo = new TodoRepo();
 
 			this.cacheElements();
 			this.bindEvents();
@@ -55,28 +58,24 @@ jQuery(function ($) {
 		},
 
 		render: function () {
-            var todos = todoRepo.getList(this.filter);
+            var todos = this.todoRepo.getList(this.filter);
 
 			this.$todoList.html(this.todoTemplate(todos));
 			this.$main.toggle(todos.length > 0);
 
-            this.$toggleAll.prop('checked', todoRepo.getList('active').length === 0);
+            this.$toggleAll.prop('checked', this.todoRepo.getList('active').length === 0);
 
             this.renderFooter();
 			this.$newTodo.focus();
 
-            todoRepo.store();
+            this.todoRepo.store();
 
 		},
 
 		renderFooter: function () {
 
-            // var totListCount = todoRepo.getList().length;
-            // var totActiveListCount = todoRepo.getList('active').length;
-
-
-            var todoCount = todoRepo.count();
-            var activeTodoCount = todoRepo.count('active');
+            var todoCount = this.todoRepo.count();
+            var activeTodoCount = this.todoRepo.count('active');
 
 			var template = this.footerTemplate({
 				activeTodoCount: activeTodoCount,
@@ -90,7 +89,7 @@ jQuery(function ($) {
 
         toggleAll: function (e) {
 
-            todoRepo.getList(this.filter);
+            this.todoRepo.getList(this.filter);
 
 			this.render();
 		},
@@ -99,7 +98,7 @@ jQuery(function ($) {
 		destroyCompleted: function () {
 
 
-            todoRepo.deleteCompleted();
+            this.todoRepo.deleteCompleted();
             this.filter = 'all';
 
 			this.render();
@@ -119,7 +118,7 @@ jQuery(function ($) {
 			if (e.which !== ENTER_KEY || !val) {
 				return;
 			}else{
-                todoRepo.add(val);
+                this.todoRepo.add(val);
             }
 
 			$input.val('');
@@ -128,7 +127,7 @@ jQuery(function ($) {
 		},
 		toggle: function (e) {
 			var id = this.idFromEl(e.target)
-            var todo = todoRepo.get(id);
+            var todo = this.todoRepo.get(id);
 			todo.completed = !todo.completed;
 			this.render();
 		},
@@ -160,18 +159,18 @@ jQuery(function ($) {
 
 
             if (val) {
-                var item = todoRepo.get(id);
+                var item = this.todoRepo.get(id);
                 item.title = val;
             }
             else {
-                todoRepo.remove(id);
+                this.todoRepo.remove(id);
             }
 
 			this.render();
 		},
 		destroy: function (e) {
             var id = this.idFromEl(e.target);
-            todoRepo.remove(id);
+            this.todoRepo.remove(id);
 
             this.render();
 		}
