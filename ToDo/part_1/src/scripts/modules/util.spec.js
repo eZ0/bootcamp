@@ -27,6 +27,16 @@ describe('util service', function(){
             expect(result).toBe("bananas");
         });
 
+        it("should return apples for 0 apple", function() {
+            var result = util.pluralize(0, 'apple');
+            expect(result).toBe("apples");
+        });
+
+        it("should return 'undefined' for 2, undefined ", function() {
+            var result = util.pluralize(2, undefined);
+            expect(result).toBe('undefined');
+        });
+
     });
 
     describe('uuid', function(){

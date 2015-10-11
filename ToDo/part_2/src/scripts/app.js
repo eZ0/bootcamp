@@ -1,12 +1,10 @@
 /*global jQuery, Handlebars, Router */
-'use strict'
+(function(){
+    'use strict'
 
-var $ = require("../bower_components/jquery/dist/jquery");
-var util = require("./modules/util.js");
-var todoRepo = require("./modules/todoRepo.js");
-
-
-// jQuery(function ($) {
+    var $ = require("../bower_components/jquery/dist/jquery");
+    var util = require("./modules/util.js");
+    var todoRepo = require("./modules/todoRepo.js");
 
 
 	Handlebars.registerHelper('eq', function (a, b, options) {
@@ -18,8 +16,6 @@ var todoRepo = require("./modules/todoRepo.js");
 
 	var App = {
 		init: function () {
-
-            // var todoRepo = new todoRepo;
 
 			this.cacheElements();
 			this.bindEvents();
@@ -178,4 +174,4 @@ var todoRepo = require("./modules/todoRepo.js");
 	};
 
 	App.init();
-// });
+})();

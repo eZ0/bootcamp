@@ -8,13 +8,14 @@ var minifyHTML = require('gulp-minify-html');
 var browserSync = require('browser-sync').create();
 var wiredep = require('wiredep').stream;
 var connect = require('gulp-connect');
+var Server = require('karma').Server;
 
 
-gulp.task('default', ['styles', 'watch', 'serve']);
+gulp.task('default', ['styles', 'watch', 'serve', 'test']);
 gulp.task('build', ['scripts', 'html', 'styles-dist']);
 
 gulp.task('styles', function(){
-    return gulp.src('./src/styles/app.scss')
+    return gulp.src('./src/styles/*.scss')
                .pipe(sourcemaps.init({loadMaps: true}))
                .pipe(sass())
                .pipe(sourcemaps.write('./'))
@@ -23,7 +24,7 @@ gulp.task('styles', function(){
 });
 
 gulp.task('styles-dist', function(){
-    return gulp.src('./src/styles/app.scss')
+    return gulp.src('./src/styles/*.scss')
                .pipe(sourcemaps.init({loadMaps: true}))
                .pipe(sass())
                .pipe(sourcemaps.write('./'))
@@ -63,6 +64,12 @@ gulp.task('serve', function() {
             baseDir: "./src"
         }
     });
+});
+
+gulp.task('test', function (done) {
+    new Server({
+        configFile: __dirname + '/karma.conf.js'
+    }, done).start();
 });
 
 

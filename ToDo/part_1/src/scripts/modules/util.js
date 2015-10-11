@@ -16,9 +16,18 @@ var util = {
         },
         pluralize: function (count, word) {
 
-            if ( (count <= 1 ) || (count === '')) {
+            if ( (count <= 1 ) || (count === '') || (count === undefined)) {
+
+                if (count === 0) {
+                    return word + 's';
+                }
                 return word;
-            }else{
+            }
+
+            if( count > 1 ){
+                if ( word === undefined ){
+                    return 'undefined';
+                }
                 return word + 's';
             }
 

@@ -1,4 +1,4 @@
-
+(function(){
       'use strict'
       var util = require("./util.js");
 
@@ -6,7 +6,7 @@
 
             constructor(){
                   const storeString = 'todos-jquery';
-                  this.todos = util.store(this.storeString);
+                  this.todos = util.store(storeString);
             }
 
             getList(filter){
@@ -78,18 +78,8 @@
                   });
             }
 
-
-            // return {
-            //       init: init,
-            //       add: add,
-            //       getList: getList,
-            //       store: store,
-            //       remove: remove,
-            //       get: get,
-            //       count: count,
-            //       deleteCompleted: deleteCompleted
-            // }
       }
 
-      // return TodoRepo;
-module.exports = new TodoRepo;
+    module.exports = new TodoRepo();
+
+})();
