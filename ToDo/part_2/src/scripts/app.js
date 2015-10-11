@@ -1,5 +1,6 @@
 /*global jQuery, Handlebars, Router */
 'use strict'
+
 var $ = require("../bower_components/jquery/dist/jquery");
 var util = require("./modules/util.js");
 var todoRepo = require("./modules/todoRepo.js");
