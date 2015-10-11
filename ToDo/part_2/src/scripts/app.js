@@ -1,5 +1,5 @@
 /*global jQuery, Handlebars, Router */
-(function(){
+// (function(){
     'use strict'
 
     var $ = require("../bower_components/jquery/dist/jquery");
@@ -174,4 +174,4 @@
 	};
 
 	App.init();
-})();
+// })();

@@ -9,6 +9,8 @@ var browserSync = require('browser-sync').create();
 var wiredep = require('wiredep').stream;
 var connect = require('gulp-connect');
 var Server = require('karma').Server;
+var useref = require('gulp-useref');
+var gulpif = require('gulp-if');
 
 
 gulp.task('default', ['styles', 'watch', 'serve', 'test']);
@@ -16,9 +18,8 @@ gulp.task('build', ['scripts', 'html', 'styles-dist']);
 
 gulp.task('styles', function(){
     return gulp.src('./src/styles/*.scss')
-               .pipe(sourcemaps.init({loadMaps: true}))
                .pipe(sass())
-               .pipe(sourcemaps.write('./'))
+                .pipe(concat('app.css'))
                .pipe(gulp.dest('./src/styles'))
                .pipe(browserSync.stream());
 });
@@ -27,6 +28,7 @@ gulp.task('styles-dist', function(){
     return gulp.src('./src/styles/*.scss')
                .pipe(sourcemaps.init({loadMaps: true}))
                .pipe(sass())
+               .pipe(concat('app.css'))
                .pipe(sourcemaps.write('./'))
                .pipe(gulp.dest('./dist/styles'));
 });
@@ -38,10 +40,17 @@ gulp.task('scripts', function(){
                .pipe(gulp.dest('./dist/scripts'));
 });
 
+
 gulp.task('html', function(){
     var options = {comments:false,spare:true};
+    var assets = useref.assets();
     return gulp.src('src/*.html')
-            .pipe(minifyHTML(options))
+            .pipe(assets)
+            // .pipe(minifyHTML(options))
+            .pipe(gulpif('*.js', uglify()))
+            .pipe(gulpif('*.css', minify()))
+            .pipe(assets.restore())
+            .pipe(useref())
             .pipe(gulp.dest('./dist'))
             .pipe(browserSync.stream());
 });

@@ -1,1 +1,0 @@
-{"version":3,"sources":["app.scss"],"names":[],"mappings":"AACA,KAAK;AACL,OAAO,CADC;EACJ,OAAO,EAAE,IAAK,GADT","file":"app.css","sourcesContent":["#main,\n#footer {\n    display: none;\n}\n"],"sourceRoot":"/source/"}

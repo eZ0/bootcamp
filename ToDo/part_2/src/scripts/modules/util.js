@@ -1,4 +1,4 @@
-(function(){
+// (function(){
     'use strict'
 
     class Util {
@@ -37,4 +37,4 @@
     };
 
     module.exports = new Util;
-})();
+//})();
