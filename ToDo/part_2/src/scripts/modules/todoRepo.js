@@ -4,12 +4,6 @@
 
       class TodoRepo {
 
-            // var todos = [];
-
-            // init(){
-            //       todos = util.store('todos-jquery');
-            // }
-
             constructor(){
                   const storeString = 'todos-jquery';
                   this.todos = util.store(this.storeString);

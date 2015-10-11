@@ -11,7 +11,7 @@ module.exports = {
       module: {
             loaders: [
                   { test:/\.js$/, loader: 'babel-loader', exclude: /(node_modules|bower_components)/ },
-                  { test:/\.css$/, loader: 'style!css?sourceMap' }
+                  { test:/\.scss$/, loader: 'style!css?sourceMap!sass?sourceMap' }
             ]
       }
 };

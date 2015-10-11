@@ -4,7 +4,7 @@
   "description": "refactoring todo app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "webpack-dev-server --hot --inline"
   },
   "author": "Ksenia Karelskaya",
   "license": "MIT",
@@ -27,6 +27,8 @@
     "karma-jasmine": "^0.3.6",
     "karma-nyan-reporter": "^0.2.2",
     "karma-phantomjs2-launcher": "^0.3.2",
+    "node-sass": "^3.3.3",
+    "sass-loader": "^3.0.0",
     "style-loader": "^0.12.4",
     "webpack": "^1.12.2",
     "webpack-dev-server": "^1.12.0",
