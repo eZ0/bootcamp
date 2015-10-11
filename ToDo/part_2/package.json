@@ -9,6 +9,8 @@
   "author": "Ksenia Karelskaya",
   "license": "MIT",
   "devDependencies": {
+    "babel-core": "^5.8.25",
+    "babel-loader": "^5.3.2",
     "browser-sync": "^2.9.10",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
@@ -24,6 +26,8 @@
     "karma-jasmine": "^0.3.6",
     "karma-nyan-reporter": "^0.2.2",
     "karma-phantomjs2-launcher": "^0.3.2",
+    "webpack": "^1.12.2",
+    "webpack-dev-server": "^1.12.0",
     "wiredep": "^2.2.2"
   },
   "dependencies": {}

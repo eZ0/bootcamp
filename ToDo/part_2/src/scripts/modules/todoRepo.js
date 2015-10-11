@@ -1,6 +1,6 @@
-var TodoRepo = (function(){
 
       'use strict'
+      var util = require("./util.js");
 
       class TodoRepo {
 
@@ -97,5 +97,5 @@ var TodoRepo = (function(){
             // }
       }
 
-      return TodoRepo;
-})();
+      // return TodoRepo;
+module.exports = new TodoRepo;
