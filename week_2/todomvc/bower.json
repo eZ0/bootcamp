@@ -1,0 +1,8 @@
+{
+  "name": "todo_app",
+  "dependencies": {
+    "handlebars": "~4.0.3",
+    "director": "~1.2.8",
+    "jquery": "~2.1.4"
+  }
+}
