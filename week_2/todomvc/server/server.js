@@ -4,6 +4,8 @@ var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 
+var cfg = require('./config');
+
 var taskApi = require('./tasks');
 
 var app = express();
@@ -21,7 +23,7 @@ app.use('/api', taskApi);
 
 
 //Config
-var port = process.env.PORT || 3000;
+var port = cfg.port;
 
 var server = app.listen(port, function(){
     console.log('Express server listening on port: '

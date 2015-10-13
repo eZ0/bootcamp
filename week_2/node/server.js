@@ -18,7 +18,6 @@ app.use(express.static(path.join(__dirname, 'public'))); //alles in public folde
 app.use('/api/products', productApi);
 app.use('/api/users', userApi);
 
-
 //setup
 var port = process.env.PORT || 3000;
 
