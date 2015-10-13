@@ -1,4 +1,5 @@
 /*global jQuery, Handlebars, Router */
+
 jQuery(function ($) {
 	'use strict';
 
@@ -15,7 +16,7 @@ jQuery(function ($) {
 
 			this.todos = util.store('todos-jquery');
 
-            todoRepo.init();
+            // todoRepo.init();
 
 			this.cacheElements();
 			this.bindEvents();
@@ -55,28 +56,40 @@ jQuery(function ($) {
 		},
 
 		render: function () {
-            var todos = todoRepo.getList(this.filter);
+            //var todos = todoRepo.getList(this.filter);
 
-			this.$todoList.html(this.todoTemplate(todos));
-			this.$main.toggle(todos.length > 0);
+            todoRepo.getList(this.filter ,function(todos){
+                console.log(this.filter);
 
-            this.$toggleAll.prop('checked', todoRepo.getList('active').length === 0);
+                this.$todoList.html(this.todoTemplate(todos));
+                this.$main.toggle(todos.length > 0);
 
-            this.renderFooter();
-			this.$newTodo.focus();
+                // this.$toggleAll.prop('checked', todoRepo.getList('active').length === 0);
 
-            todoRepo.store();
+                this.renderFooter(todos);
+                this.$newTodo.focus();
+
+                todoRepo.store();
+            }.bind(this));
 
 		},
 
-		renderFooter: function () {
+		renderFooter: function (todos) {
 
             // var totListCount = todoRepo.getList().length;
             // var totActiveListCount = todoRepo.getList('active').length;
 
+            console.log(todos);
 
-            var todoCount = todoRepo.count();
-            var activeTodoCount = todoRepo.count('active');
+            var todoCount = todos.length;
+
+            var activeTodos = _.filter(todos, function(completed){
+                return completed === 'active';
+            });
+
+            console.log('Length is '+ activeTodos.length);
+
+            var activeTodoCount = 2;
 
 			var template = this.footerTemplate({
 				activeTodoCount: activeTodoCount,
@@ -90,7 +103,7 @@ jQuery(function ($) {
 
         toggleAll: function (e) {
 
-            todoRepo.getList(this.filter);
+            todoRepo.getList('all');
 
 			this.render();
 		},
@@ -119,18 +132,27 @@ jQuery(function ($) {
 			if (e.which !== ENTER_KEY || !val) {
 				return;
 			}else{
-                todoRepo.add(val);
+                todoRepo.add(val, function(){
+                    $input.val('');
+
+                    this.render();
+                }.bind(this));
             }
 
-			$input.val('');
+			// $input.val('');
 
-			this.render();
+			// this.render();
 		},
 		toggle: function (e) {
 			var id = this.idFromEl(e.target)
-            var todo = todoRepo.get(id);
-			todo.completed = !todo.completed;
-			this.render();
+
+            todoRepo.get(id, function(todo){
+
+                todo.completed = !todo.completed;
+                todoRepo.save(todo, function() {
+                    this.render();
+                }.bind(this));
+            }.bind(this));
 		},
 		edit: function (e) {
 			var $input = $(e.target).closest('li').addClass('editing').find('.edit');
@@ -160,20 +182,40 @@ jQuery(function ($) {
 
 
             if (val) {
-                var item = todoRepo.get(id);
-                item.title = val;
+                // var item = todoRepo.get(id, function(){
+                //     this.item.title = val;
+                // }.bind(this));
+
+                todoRepo.get(id, function(todo){
+                    todo.title = val;
+                    todoRepo.save(todo, function() {
+                       this.render();
+                    }.bind(this));
+                }.bind(this));
+
+                // todoRepo.get(id, todo => {
+                //     todo.title = val;
+                //     todoRepo.save(todo, () => {
+                //        this.render();
+                //     });
+                // });
+
+
+
             }
             else {
-                todoRepo.remove(id);
+                todoRepo.remove(id, function(){
+                    this.render();
+                }.bind(this));
             }
 
-			this.render();
+            // this.render();
 		},
 		destroy: function (e) {
             var id = this.idFromEl(e.target);
-            todoRepo.remove(id);
-
-            this.render();
+            todoRepo.remove(id, function(){
+                this.render();
+            }.bind(this));
 		}
 	};
 

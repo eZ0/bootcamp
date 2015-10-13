@@ -1,25 +1,26 @@
 var express = require('express');
-var path = require('path'); //deel van node
+var path = require('path');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
-var productApi = require('./products');
-var userApi = require('./users');
+var cors = require('cors');
+
+var taskApi = require('./tasks');
 
 var app = express();
 
-app.use(morgan('dev'));
+app.use(cors());
+
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public'))); //alles in public folder
 
-// routes
-app.use('/api/products', productApi);
-app.use('/api/users', userApi);
+app.use(express.static(path.join(__dirname, 'src')));
+
+app.use('/api', taskApi);
 
 
-//setup
+//Config
 var port = process.env.PORT || 3000;
 
 var server = app.listen(port, function(){

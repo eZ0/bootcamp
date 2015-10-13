@@ -3,7 +3,11 @@
 	<head>
 		<meta charset="utf-8">
 		<title>~~ Todo ~~</title>
-        <link rel="stylesheet" href="styles/app.css">
+        <!-- build:css styles/app.css -->
+            <!-- bower:css -->
+            <!-- endbower -->
+            <link rel="stylesheet" href="styles/app.css"></link>
+        <!-- endbuild -->
 	</head>
 	<body>
 		<section id="todoapp">
@@ -50,6 +54,17 @@
 			</ul>
 			{{#if completedTodos}}<button id="clear-completed">Clear completed</button>{{/if}}
 		</script>
-        <script src="scripts/app.js"></script>
+        <!-- build:js scripts/app.js -->
+            <script src="scripts/base.js"></script>
+            <!-- bower:js -->
+            <script src="bower_components/jquery/dist/jquery.js"></script>
+            <script src="bower_components/handlebars/handlebars.js"></script>
+            <script src="bower_components/director/build/director.js"></script>
+            <script src="bower_components/underscore/underscore.js"></script>
+            <!-- endbower -->
+            <script src="scripts/modules/util.js"></script>
+            <script src="scripts/modules/todoRepo.js"></script>
+            <script src="scripts/app.js"></script>
+        <!-- endbuild -->
 	</body>
 </html>
