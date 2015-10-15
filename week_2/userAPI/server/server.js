@@ -7,27 +7,35 @@ var userApi = require('./routes/users');
 var User = require('./model/users');
 var cfg = require('./config');
 var faker = require('faker');
+var auth = require('./middleware/auth');
+var globalErrorHandler = require('./middleware/globalErrorHandler');
+
 
 
 var app = express();
 
 app.use(morgan('dev'));
 
+// Auth middelware
+// app.use(auth('12345'));
+
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
 
-//db setup
+// db setup
 mongoose.connect('mongodb://localhost/users');
 
 // routes
 app.use('/api/users', userApi);
 
+// error handler middelware
+app.use(globalErrorHandler());
 
 createInitialData();
 
-//setup server
+// setup server
 var port = cfg.port;
 
 var server = app.listen(port, function(){
@@ -38,16 +46,18 @@ var server = app.listen(port, function(){
 function createInitialData() {
     User.findOne({}, function(user) {
         if (!user) {
+            // transfer to config/dataGenerator
             var userList = [];
             for(var i = 0; i < 1000; i++) {
                 var user = {
-                    name: faker.name.findName(),
+                    firstName: faker.name.firstName(),
+                    lastName: faker.name.lastName(),
                     email: faker.internet.email(),
-                    age: faker.random.number(),
+                    age: faker.random.number(100),
                     homeAddress: {
                         addressLine: faker.address.streetAddress(),
                         city: faker.address.city(),
-                        zip: faker.address.country()
+                        zip: faker.random.number()
                     }
                 }
                 userList.push(user);
@@ -63,3 +73,4 @@ function createInitialData() {
     });
 
 }
+
