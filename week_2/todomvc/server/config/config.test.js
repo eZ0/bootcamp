@@ -1,4 +1,4 @@
-var config = require('./config.development');
+var config = require('./development');
 
 config.env = 'test';
 config.hostname = 'test.example';

@@ -1,6 +1,6 @@
 var config = module.exports = {};
 
-config.env = 'development';
+config.env = 'develop';
 config.hostname = 'dev.todo.com';
 
 
