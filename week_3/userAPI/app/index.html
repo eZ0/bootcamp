@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak],
+        .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+
+</head>
+<body ng-app="userApp" ng-cloak>
+
+    <div ng-controller="UserController">
+
+        <table class="table table-striped">
+            <tr>
+                <th><a href="" ng-click="sort('name')">Name</a></th>
+                <th><a  href="" ng-click="sort('age')">Age</a></th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Action</th>
+            </tr>
+            <tr ng-repeat="user in users | orderBy:sortColumn:sortOrder">
+                <td>{{user.name}}</td>
+                <td>{{user.age}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.address}}</td>
+                <td><button ng-click="deleteUser(user)">Delete</button></td>
+            </tr>
+        </table>
+
+    </div>
+
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="app.js"></script>
+    <script src="controllers.js"></script>
+    <script src="services.js"></script>
+</body>
+</html>

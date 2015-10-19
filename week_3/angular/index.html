@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title></title>
+        <style>
+            [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak],
+            .ng-cloak, .x-ng-cloak {
+                display: none !important;
+            }
+
+            .myStyle {
+                background-color : #049049;
+                font-size : 16px;
+            }
+
+            .myStyle2 {
+                background-color : #CFCFCF;
+                font-size : 16px;
+            }
+        </style>
+    </head>
+
+    <body ng-app="myApp" ng-cloak >
+
+        <div ng-controller="MyController">
+            {{message}} </br>
+            <!--<span ng-bind="message"></span></br>-->
+            <b>Invoice:</b>
+            <div>
+                Quantity: <input type="text" ng-model="quantity" ng-change="computeMessage()">
+                {{quantity}}
+            </div>
+            <div>
+                Costs: <input type="number" ng-model="cost">
+                {{cost | currency}}
+            </div>
+            <div>
+                <b>Total: </b> {{ quantity * cost | currency}}
+            </div>
+
+            <div>
+                Name: <input type="text" ng-model="name">
+            </div>
+            <div>
+                City: <input type="text" ng-model="city">
+            </div>
+
+            <button ng-click="addCustomer()">Add Customer</button>
+            </br>
+            filter: <input type="text" ng-model="nameFilter"/>
+            <ul>
+                <li ng-repeat="customer in customers | orderBy:'city' | filter:{city:nameFilter}">
+                    {{$index}} {{customer.name}} from {{customer.city}}
+                </li>
+            </ul>
+
+            <span ng-style="messageStyle">{{message}}</span>
+
+            <span class="otherStyle" ng-class="{'myStyle' : showAlert}">{{message}}</span>
+            <span class="otherStyle" ng-class="showAlert ? 'myStyle2' : 'myOtherStyle'">{{message}}</span>
+
+            <button ng-click="toggle()">Toggle</button>
+            <div ng-hide="!showMessage">
+                {{message}}
+            </div>
+
+            <span> {{error}} </span>
+
+        </div>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="app.js"></script>
+        <script src="MyController.js"></script>
+        <script src="MyService.js"></script>
+    </body>
+
+</html>
