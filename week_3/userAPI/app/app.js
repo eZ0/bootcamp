@@ -1,6 +1,13 @@
-(function(){
+(function(angular){
+
     'use strict';
 
-    angular.module('userApp', []);
+    angular.module('userApp', [
+            'ui.bootstrap'
+            //
+            //'controllers'
+    ]);
 
-})();
+    // wrapper for underscore
+
+})(angular);

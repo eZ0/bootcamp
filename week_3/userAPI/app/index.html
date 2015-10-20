@@ -9,27 +9,43 @@
         .ng-cloak, .x-ng-cloak {
             display: none !important;
         }
+        .ng-scope{
+            /*border: dashed orangered;*/
+        }
     </style>
 
 </head>
-<body ng-app="userApp" ng-cloak>
+<body ng-app="userApp" ng-cloak class="container-fluid">
 
-    <div ng-controller="UserController">
+    <div ng-controller="AlertController as vm" class="row">
 
+        <div class="col-md-6 col-md-offset-3">
+
+            <uib-alert ng-if="vm.alert" type="danger" close="vm.closeAlert()">{{vm.alert}}</uib-alert>
+            <button type="button" class='btn btn-success btn-sm center-block' ng-click="vm.showAlert()">Show Alert</button>
+
+            <p>Count: {{vm.count}}</p>
+
+        </div>
+
+    </div>
+
+    <div ng-controller="UserController as vm" class="row">
+        <h4>All the users</h4>
         <table class="table table-striped">
             <tr>
-                <th><a href="" ng-click="sort('name')">Name</a></th>
-                <th><a  href="" ng-click="sort('age')">Age</a></th>
+                <th><a href="" ng-click="vm.sort('name')">Name</a></th>
+                <th><a  href="" ng-click="vm.sort('age')" >Age</a></th>
                 <th>Email</th>
                 <th>Address</th>
                 <th>Action</th>
             </tr>
-            <tr ng-repeat="user in users | orderBy:sortColumn:sortOrder">
+            <tr ng-repeat="user in vm.users | orderBy:vm.sortColumn:vm.sortOrder">
                 <td>{{user.name}}</td>
                 <td>{{user.age}}</td>
                 <td>{{user.email}}</td>
                 <td>{{user.address}}</td>
-                <td><button ng-click="deleteUser(user)">Delete</button></td>
+                <td><button ng-click="vm.deleteUser(user)" class="btn btn-danger btn-xs">Delete</button></td>
             </tr>
         </table>
 
@@ -38,8 +54,10 @@
 
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="app.js"></script>
-    <script src="controllers.js"></script>
+    <script src="UserController.js"></script>
+    <script src="AlertController.js"></script>
     <script src="services.js"></script>
 </body>
 </html>
