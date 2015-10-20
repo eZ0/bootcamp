@@ -34,7 +34,7 @@
         }
         vm.deleteUser = function(user) {
 
-            userService.deleteUser(user.id)
+            userService.deleteUser(user)
                 .then(function () {
                     activate();
                 })

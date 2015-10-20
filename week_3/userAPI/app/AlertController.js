@@ -7,6 +7,7 @@
 
     function AlertController($interval){
         var vm = this;
+
         vm.alert = null;
         vm.count = 10;
 
@@ -16,10 +17,11 @@
 
 
         function activate() {
+
             $interval(function() {
                 vm.count = vm.count - 1;
 
-                if(vm.count == 0) 
+                if(vm.count == 0)
                     vm.showAlert();
 
             }, 500, 10);
@@ -34,13 +36,6 @@
             vm.alert = null;
         };
 
-        //vm.refreshCount = function(){
-        //    return vm.count = vm.count + 1
-        //};
-
-        //vm.countSeconds = function(){
-        //    return $interval(vm.refreshCount, 100);
-        //}
     }
 
 })();
