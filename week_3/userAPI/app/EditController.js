@@ -5,13 +5,50 @@
         .module('userApp')
         .controller('EditController', EditController);
 
-    function EditController($routeParams, $log){
+    function EditController($stateParams, userService, $state){
 
         var vm = this;
 
-        vm.userId = $routeParams.userId;
+        vm.submit = submit;
+        vm.user = {};
 
-        $log.info('User id: ' + vm.userId);
+        activate();
+
+        /////////
+
+        function activate() {
+
+            var userId = $stateParams.userId;
+            if (!userId)
+                return;
+
+            userService.getUser(userId)
+                .then(function(user){
+                    vm.user = user;
+                })
+                .catch(function(err){
+                    return err;
+                });
+        }
+
+        function submit(valid){
+            if(!valid)
+                return;
+
+            userService.updateUser(vm.user)
+                .then(function (user) {
+                    vm.user = user;
+                    $state.go('index');
+                })
+                .catch(function(err){
+                    return err;
+                });
+
+        }
+
+
+
+
 
     }
 

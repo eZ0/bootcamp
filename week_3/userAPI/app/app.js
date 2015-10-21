@@ -9,13 +9,20 @@
             'ngAnimate',
             'ngResource',
             'ngSanitize',
-            'ngRoute'
+            'ngMessages',
+            'ui.router'
         ])
         .factory('_', function($window){
             return $window._;
         })
         .factory('UserResource', function($resource){
-            return $resource('/api/users/:id', {id: '@id'});
+
+            var resource = $resource('/api/users/:id',
+                                {id: '@id'},
+                { update: {method:'PUT'} }
+            );
+
+            return resource;
         })
         .constant('config', {
             "baseURL" : '/api/'
@@ -57,28 +64,67 @@
                 }
             }
         })
-        .config(function($routeProvider){
-            $routeProvider
-                .when('/alert', {
+        .config(function($stateProvider, $urlRouterProvider){
+            $stateProvider
+                .state('alert',{
+                    url: '/alert',
                     templateUrl: 'views/alert.html',
                     controller: 'AlertController',
                     controllerAs: 'vm'
                 })
-                .when('/index', {
+                .state('index',{
+                    url: '/index',
                     templateUrl: 'views/list.html',
                     controller: 'UserController',
-                    controllerAs: 'vm'
+                    controllerAs: 'vm',
+                    resolve: {
+                        users: function(userService){
+                            return userService.getUsers();
+                        }
+                    }
                 })
-                .when('/add', {
+                .state('add',{
+                    url: '/add',
                     templateUrl: 'views/edit.html',
                     controller: 'EditController',
                     controllerAs: 'vm'
                 })
-                .when('/edit/:userId?', {
+                .state('edit',{
+                    url: '/edit/:userId?',
                     templateUrl: 'views/edit.html',
                     controller: 'EditController',
                     controllerAs: 'vm'
-                })
+                });
+
+            $urlRouterProvider.otherwise('index');
+
+
+            //$routeProvider
+            //    .when('/alert', {
+            //        templateUrl: 'views/alert.html',
+            //        controller: 'AlertController',
+            //        controllerAs: 'vm'
+            //    })
+            //    .when('/index', {
+            //        templateUrl: 'views/list.html',
+            //        controller: 'UserController',
+            //        controllerAs: 'vm',
+            //        resolve: {
+            //            users: function(userService){
+            //                return userService.getUsers();
+            //            }
+            //        }
+            //    })
+            //    .when('/add', {
+            //        templateUrl: 'views/edit.html',
+            //        controller: 'EditController',
+            //        controllerAs: 'vm'
+            //    })
+            //    .when('/edit/:userId?', {
+            //        templateUrl: 'views/edit.html',
+            //        controller: 'EditController',
+            //        controllerAs: 'vm'
+            //    })
                 //.otherwise({ redirectTo: '/index' });
 
         });

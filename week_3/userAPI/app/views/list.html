@@ -12,7 +12,7 @@
                 <th>Action</th>
             </tr>
             <tr ng-repeat="user in vm.users">
-                <td><a href="#/edit/{{user.id}}" >{{user.name }}</a></td>
+                <td><a ui-sref="edit({userId:user.id})" >{{user.name }}</a></td>
                 <td>{{user.age}}</td>
                 <td>{{user.email }}</td>
                 <td>{{user.address}}</td>

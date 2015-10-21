@@ -19,14 +19,20 @@
         <button ng-click="vm.goToView2()" class="btn btn-xs btn-success">goToView2</button>
     </div>
 
-    <div ng-view></div>
+    <div ui-view></div>
 
-    <a href="#/">Home</a>
-    <a href="#/view1">View1</a>
-    <a href="#/view2">View2</a>
+       <a ui-sref="view1">View1</a>
+       <a ui-sref="view2">View2</a>
+
+    <!--<a href="#/">Home</a>-->
+    <!--<a href="#/view1">View1</a>-->
+    <!--<a href="#/view2">View2</a>-->
+
+
    </div>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="controllers/controllers.module.js"></script>
     <script src="app.js"></script>
     <script src="controllers/mainController.js"></script>

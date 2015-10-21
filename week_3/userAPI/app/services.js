@@ -17,10 +17,22 @@
 
                 function getUsers(){
 
-                    return UserResource.query().$promise
-                        .then(function (users) {
-                                    return users;
-                                });
+                    return UserResource.query().$promise;
+                }
+
+                function getUser(id){
+
+                    return UserResource.get({id: id}).$promise;
+                }
+
+                function updateUser(user){
+
+                    if (user.id) {
+                        return UserResource.update(user).$promise;
+                    }
+                    if(user) {
+                        return UserResource.save(user).$promise;
+                    }
                 }
 
                 function deleteUser(user){
@@ -31,7 +43,9 @@
 
                 return {
                     getUsers: getUsers,
-                    deleteUser: deleteUser
+                    deleteUser: deleteUser,
+                    getUser: getUser,
+                    updateUser: updateUser
                 }
             }
         }

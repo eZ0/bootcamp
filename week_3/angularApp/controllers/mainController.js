@@ -8,7 +8,7 @@
         .controller('View2Controller', View2Controller);
 
 
-    function MainController($location){
+    function MainController($state){
         var vm = this;
         vm.hello = 'Hello world';
         vm.goToView2 = goToView2;
@@ -22,7 +22,8 @@
         }
 
         function goToView2(){
-            $location.path('view2');
+            $state.go('view2');
+            //$location.path('view2');
         }
     }
 
@@ -34,10 +35,10 @@
 
     }
 
-    function View2Controller($log, $routeParams){
+    function View2Controller($log, $stateParams){
         var vm = this;
 
-        $log.info('route param ', $routeParams.userId);
+        $log.info('state param ', $stateParams.userId);
 
         vm.message = 'Hello world? Srsly?';
         $log.info('View2Controller');

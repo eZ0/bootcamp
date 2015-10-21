@@ -5,33 +5,65 @@
 
 <div class="row">
     <div class="col-xs-6 col-md-4">
-    <form>
+    <form name="myForm" novalidate ng-submit="vm.submit(myForm.$valid)">
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="name">
+            <input type="text" class="form-control"
+                   id="name" placeholder="name"
+                   name="name" ng-model="vm.user.name"
+                   ng-maxlength="20" ng-minlength="5"
+                   required>
         </div>
+        <div ng-messages="myForm.name.$error" class="text-danger"
+             ng-if="myForm.name.$dirty || myForm.$submitted">
+            <div ng-messages-include="error-messages.html"></div>
+        </div>
+
         <div class="form-group">
             <label for="age">Age</label>
-            <input type="text" class="form-control" id="age" placeholder="age">
+            <input type="number" class="form-control"
+                   id="age" placeholder="age"
+                   name="age" ng-model="vm.user.age"
+                   min="18" required>
         </div>
+        <div ng-messages="myForm.age.$error" class="text-danger"
+             ng-if="myForm.age.$dirty || myForm.$submitted">
+            <div ng-messages-include="error-messages.html"></div>
+        </div>
+
         <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control"
+                   id="email" placeholder="Email"
+                   name="email" ng-model="vm.user.email"
+                   required>
         </div>
+        <div ng-messages="myForm.email.$error" class="text-danger"
+             ng-if="myForm.email.$dirty || myForm.$submitted">
+            <div ng-messages-include="error-messages.html"></div>
+        </div>
+
         <div class="form-group">
             <label for="address">Adress</label>
-            <input type="text" class="form-control" id="address" placeholder="address">
+            <input type="text" class="form-control"
+                   id="address" placeholder="address"
+                   name="address" ng-model="vm.user.address">
         </div>
         <div class="form-group">
             <label for="City">City</label>
-            <input type="text" class="form-control" id="city" placeholder="city">
+            <input type="text" class="form-control"
+                   id="city" placeholder="city"
+                   name="city" ng-model="vm.user.city">
         </div>
         <div class="form-group">
             <label for="zip">Zip</label>
-            <input type="text" class="form-control" id="zip" placeholder="zip">
+            <input type="text" class="form-control"
+                   id="zip" placeholder="zip"
+                   name="zip" ng-model="vm.user.zip">
         </div>
 
-        <button type="submit" class="btn btn-default">Save</button>
+        <button type="submit" class="btn btn-default" >Save</button>
     </form>
         </div>
+   <!--<pre>{{ myForm | json }}</pre>-->
 </div>

@@ -5,7 +5,7 @@
         .module('userApp')
         .controller('UserController', UserController);
 
-    function UserController(userService, $filter){
+    function UserController(userService, $filter, users){
 
         var vm = this;
 
@@ -25,23 +25,24 @@
 
         function activate() {
 
-            var gmailFilter = $filter('filterGmail');
+            vm.users = users;
+            //var gmailFilter = $filter('filterGmail');
 
-            userService.getUsers()
-                .then(function (users) {
-                    //vm.users = response.data;
-                    var filteredUsers =  gmailFilter(users);
-                    vm.users = filteredUsers;
-                })
-                .catch(function(err){
-                    return err;
-                });
+            //userService.getUsers()
+            //    .then(function (users) {
+            //        //vm.users = response.data;
+            //        var filteredUsers =  gmailFilter(users);
+            //        vm.users = filteredUsers;
+            //    })
+            //    .catch(function(err){
+            //        return err;
+            //    });
         }
         vm.deleteUser = function(user) {
 
             userService.deleteUser(user)
                 .then(function () {
-                    activate();
+                    return userService.getUsers();
                 })
                 .then(function (users) {
                     vm.users = users;
