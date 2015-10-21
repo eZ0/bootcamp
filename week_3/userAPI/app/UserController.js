@@ -5,13 +5,14 @@
         .module('userApp')
         .controller('UserController', UserController);
 
-    function UserController(userService){
+    function UserController(userService, $filter){
 
         var vm = this;
 
         // create an array
         vm.users = [];
         vm.sortOrder = false;
+        vm.text = '<italic>hello world</italic>';
 
         activate();
 
@@ -23,10 +24,14 @@
         };
 
         function activate() {
+
+            var gmailFilter = $filter('filterGmail');
+
             userService.getUsers()
                 .then(function (users) {
                     //vm.users = response.data;
-                    vm.users = users;
+                    var filteredUsers =  gmailFilter(users);
+                    vm.users = filteredUsers;
                 })
                 .catch(function(err){
                     return err;

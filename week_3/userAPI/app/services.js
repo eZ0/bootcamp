@@ -15,26 +15,18 @@
             //factory
             this.$get = function userService($http, UserResource){
 
-                //var UserResource = $resource('/api/users/:id', {id: '@id'});
-
                 function getUsers(){
 
                     return UserResource.query().$promise
                         .then(function (users) {
                                     return users;
                                 });
-
-                    //return $http.get(baseURL + 'users')
-                    //    .then(function (response) {
-                    //        return response.data;
-                    //    })
                 }
 
                 function deleteUser(user){
 
                     return UserResource.remove(user).$promise;
 
-                    //return $http.delete(baseURL + 'users/'+ user.id);
                 }
 
                 return {

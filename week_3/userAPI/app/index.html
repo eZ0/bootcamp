@@ -9,56 +9,44 @@
         .ng-cloak, .x-ng-cloak {
             display: none !important;
         }
-        .ng-scope{
+        .ng-scope {
             /*border: dashed orangered;*/
         }
+        .nav li{
+              float: left;
+        }
+        .row{
+            margin-top: 50px;
+        }
     </style>
+    <link rel="stylesheet" href="bower_components/angularjs-toaster/toaster.css"/>
 
 </head>
 <body ng-app="userApp" ng-cloak class="container-fluid">
 
-    <div ng-controller="AlertController as vm" class="row">
 
-        <div class="col-md-6 col-md-offset-3">
 
-            <uib-alert ng-if="vm.alert" type="danger" close="vm.closeAlert()">{{vm.alert}}</uib-alert>
-            <button type="button" class='btn btn-success btn-sm center-block' ng-click="vm.showAlert()">Show Alert</button>
+    <ng-include src="'views/menu.html'"></ng-include>
 
-            <p>Count: {{vm.count}}</p>
 
-        </div>
 
-    </div>
-
-    <div ng-controller="UserController as vm" class="row">
-        <h4>All the users</h4>
-        <table class="table table-striped">
-            <tr>
-                <th><a href="" ng-click="vm.sort('name')">Name</a></th>
-                <th><a  href="" ng-click="vm.sort('age')" >Age</a></th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Action</th>
-            </tr>
-            <tr ng-repeat="user in vm.users | orderBy:vm.sortColumn:vm.sortOrder">
-                <td>{{user.name}}</td>
-                <td>{{user.age}}</td>
-                <td>{{user.email}}</td>
-                <td>{{user.address}}</td>
-                <td><button ng-click="vm.deleteUser(user)" class="btn btn-danger btn-xs">Delete</button></td>
-            </tr>
-        </table>
-
-    </div>
+    <div ng-view></div>
 
 
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/AngularJS-Toaster/toaster.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+
     <script src="app.js"></script>
     <script src="UserController.js"></script>
     <script src="AlertController.js"></script>
+    <script src="EditController.js"></script>
     <script src="services.js"></script>
+    <script src="filters.js"></script>
 </body>
 </html>

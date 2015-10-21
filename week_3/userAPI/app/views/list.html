@@ -1,0 +1,22 @@
+    <toaster-container></toaster-container>
+
+
+    <div class="row">
+        <h4 ng-bind-html="vm.text"></h4>
+        <table class="table table-striped">
+            <tr>
+                <th><a href="" ng-click="vm.sort('name')">Name</a></th>
+                <th><a  href="" ng-click="vm.sort('age')" >Age</a></th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Action</th>
+            </tr>
+            <tr ng-repeat="user in vm.users">
+                <td><a href="#/edit/{{user.id}}" >{{user.name }}</a></td>
+                <td>{{user.age}}</td>
+                <td>{{user.email }}</td>
+                <td>{{user.address}}</td>
+                <td><button ng-click="vm.deleteUser(user)" class="btn btn-danger btn-xs">Delete</button></td>
+            </tr>
+        </table>
+    </div>
