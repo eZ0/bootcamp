@@ -5,6 +5,8 @@
         .module('userApp')
         .controller('AlertController', AlertController);
 
+
+    AlertController.$inject = ['$interval'];
     function AlertController($interval){
         var vm = this;
 

@@ -5,6 +5,8 @@
         .module('userApp')
         .controller('EditController', EditController);
 
+
+    EditController.$inject = ['$stateParams', 'userService', '$state'];
     function EditController($stateParams, userService, $state){
 
         var vm = this;

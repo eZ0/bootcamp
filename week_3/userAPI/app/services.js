@@ -13,7 +13,7 @@
             };
 
             //factory
-            this.$get = function userService($http, UserResource){
+            this.$get = ['$http', 'UserResource', function userService($http, UserResource){
 
                 function getUsers(){
 
@@ -47,7 +47,7 @@
                     getUser: getUser,
                     updateUser: updateUser
                 }
-            }
+            }];
         }
 
         //.service('userService', userService);

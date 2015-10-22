@@ -15,7 +15,7 @@
         .factory('_', function($window){
             return $window._;
         })
-        .factory('UserResource', function($resource){
+        .factory('UserResource', ['$resource', function($resource){
 
             var resource = $resource('/api/users/:id',
                                 {id: '@id'},
@@ -23,19 +23,19 @@
             );
 
             return resource;
-        })
+        }])
         .constant('config', {
             "baseURL" : '/api/'
         })
-        .config(function(userServiceProvider){
+        .config(['userServiceProvider',function(userServiceProvider){
             userServiceProvider.setBaseURL('/api/');
-        })
-        .config(function($httpProvider){
+        }])
+        .config(['$httpProvider',function($httpProvider){
             //$httpProvider.interceptors.push('httpLogInterceptor');
             //$httpProvider.interceptors.push('httpHeaderInterceptor');
             $httpProvider.interceptors.push('httpErrorInterceptor');
-        })
-        .factory('httpLogInterceptor', function($q){
+        }])
+        .factory('httpLogInterceptor', function(){
             return {
                 //elke http call die bij get passeert
                 request: function(request){
@@ -44,7 +44,7 @@
                 }
             }
         })
-        .factory('httpHeaderInterceptor', function($q){
+        .factory('httpHeaderInterceptor', function(){
             return {
                 request: function(request){
                     request.headers.Authorization = 'Ksenia';
@@ -52,7 +52,7 @@
                 }
             }
         })
-        .factory('httpErrorInterceptor', function($q, toaster){
+        .factory('httpErrorInterceptor',['$q', 'toaster', function($q, toaster){
             return {
                 request: function(request){
                     toaster.pop('success', "Great Success!", request.url);
@@ -63,8 +63,8 @@
                     return $q.reject(response);
                 }
             }
-        })
-        .config(function($stateProvider, $urlRouterProvider){
+        }])
+        .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
             $stateProvider
                 .state('alert',{
                     url: '/alert',
@@ -98,36 +98,7 @@
 
             $urlRouterProvider.otherwise('index');
 
-
-            //$routeProvider
-            //    .when('/alert', {
-            //        templateUrl: 'views/alert.html',
-            //        controller: 'AlertController',
-            //        controllerAs: 'vm'
-            //    })
-            //    .when('/index', {
-            //        templateUrl: 'views/list.html',
-            //        controller: 'UserController',
-            //        controllerAs: 'vm',
-            //        resolve: {
-            //            users: function(userService){
-            //                return userService.getUsers();
-            //            }
-            //        }
-            //    })
-            //    .when('/add', {
-            //        templateUrl: 'views/edit.html',
-            //        controller: 'EditController',
-            //        controllerAs: 'vm'
-            //    })
-            //    .when('/edit/:userId?', {
-            //        templateUrl: 'views/edit.html',
-            //        controller: 'EditController',
-            //        controllerAs: 'vm'
-            //    })
-                //.otherwise({ redirectTo: '/index' });
-
-        });
+        }]);
 
 
 })(angular);
