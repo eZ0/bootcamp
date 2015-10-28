@@ -1,6 +1,35 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+
+var ReactRouter = require('react-router');
+var Router = ReactRouter.Router;
+var Route = ReactRouter.Route;
+var IndexRoute = ReactRouter.IndexRoute;
+
+//ReactDOM.render(<UserContainer />, document.getElementById('app'));
+
+var Home = require('./components/home.jsx');
 var UserContainer = require('./components/UserContainer.jsx');
+var Navbar = require('./components/navbar.jsx');
 
+var createBrowserHistory = require('history/lib/createBrowserHistory');
 
-ReactDOM.render(<UserContainer />, document.getElementById('app'));
+var App = React.createClass({
+    render: function(){
+        return (
+            <div>
+                <Navbar />
+                {this.props.children}
+            </div>
+        )
+    }
+});
+
+ReactDOM.render((
+   <Router history={createBrowserHistory()}>
+       <Route path="/" component={App}>
+           <IndexRoute component={Home}></IndexRoute>
+           <Route path="users" component={UserContainer}></Route>
+       </Route>
+   </Router>
+), document.getElementById('app'));
