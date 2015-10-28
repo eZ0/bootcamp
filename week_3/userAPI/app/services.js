@@ -13,7 +13,7 @@
             };
 
             //factory
-            this.$get = ['$http', 'UserResource', function userService($http, UserResource){
+            this.$get = ['UserResource', function userService(UserResource){
 
                 function getUsers(){
 

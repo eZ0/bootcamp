@@ -14,7 +14,7 @@
         // create an array
         vm.users = [];
         vm.sortOrder = false;
-        vm.text = '<italic>hello world</italic>';
+        //vm.text = '<italic>hello world</italic>';
 
         activate();
 

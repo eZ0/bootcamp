@@ -18,7 +18,8 @@
 
     }
 
-    function filterGmail($log, _) {
+    filterGmail.$inject = ['_'];
+    function filterGmail(_) {
 
         return function(input) {
             return _.filter(input, function(item) {

@@ -12,9 +12,9 @@
             'ngMessages',
             'ui.router'
         ])
-        .factory('_', function($window){
+        .factory('_',['$window', function($window){
             return $window._;
-        })
+        }])
         .factory('UserResource', ['$resource', function($resource){
 
             var resource = $resource('/api/users/:id',
@@ -78,9 +78,9 @@
                     controller: 'UserController',
                     controllerAs: 'vm',
                     resolve: {
-                        users: function(userService){
+                        users: ['userService', function(userService){
                             return userService.getUsers();
-                        }
+                        }]
                     }
                 })
                 .state('add',{

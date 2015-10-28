@@ -1,0 +1,19 @@
+{
+  "name": "angDirectives",
+  "version": "0.0.0",
+  "homepage": "https://github.com/eZ0/bootcamp",
+  "authors": [
+    "eZ0 <kusksu@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
