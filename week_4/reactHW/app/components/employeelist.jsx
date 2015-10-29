@@ -1,4 +1,6 @@
 var React = require('react');
+var ReactRouter = require('react-router');
+var Link = ReactRouter.Link;
 
 var EmployeeList = React.createClass({
     getDefaultProps: function(){
@@ -14,7 +16,9 @@ var EmployeeList = React.createClass({
     _renderEmployees: function(){
         //console.log(this.props.employees);
         return this.props.employees.map(function(employee, index){
-            return <li key={index}>{employee}</li>
+            return <li key={index}>
+                        <Link to={`/employees/${employee}`}>{employee}</Link>
+                    </li>
         })
     },
     componentDidUpdate: function(){

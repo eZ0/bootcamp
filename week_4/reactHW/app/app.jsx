@@ -10,6 +10,7 @@ var Home = require('./components/home.jsx');
 var About = require('./components/about.jsx');
 var EmployeeContainer = require('./components/employeecontainer.jsx');
 var Navbar = require('./components/navbar.jsx');
+var Employee = require('./components/employee.jsx');
 
 var createBrowserHistory = require('history/lib/createBrowserHistory');
 
@@ -30,6 +31,7 @@ ReactDOM.render((
             <IndexRoute component={Home}></IndexRoute>
             <Route path="about" component={About}></Route>
             <Route path="employees" component={EmployeeContainer}></Route>
+            <Route path="employees/:name" component={Employee}></Route>
         </Route>
     </Router>
 ), document.getElementById('app'));

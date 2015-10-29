@@ -2,34 +2,33 @@ var React = require('react');
 var EmployeeList = require('./employeelist.jsx');
 var AddEmployee = require('./addemployee.jsx');
 
+var employeeStore = require('../stores/employeestore.js');
+var employeeActions = require('../actions/employeeactions.js');
+
 var EmployeeContainer = React.createClass({
     getInitialState: function(){
         return{
-            company: 'Euricom',
-            employees: ['Peter', 'Frederik', 'Kevin'],
+            company: employeeStore.getCompany(),
+            employees: employeeStore.getEmployees(),
             newEmployee: '',
             errors: {}
         }
     },
 
-    // Invoked once before first render
-    componentWillMount: function(){
-        // Calling setState here does not cause a re-render
-        console.log('In Component Will Mount');
-    },
     // Invoked once after the first render
     componentDidMount: function(){
         // You now have access to this.getDOMNode()
-        console.log('In Component Did Mount');
+        employeeStore.addChangeListener(this._onStoreChange);
     },
-    //// Invoked whenever there is a prop change
-    //// Called BEFORE render
-    //componentWillReceiveProps: function(nextProps){
-    //    // Not called for the initial render
-    //    // Previous props can be accessed by this.props
-    //    // Calling setState here does not trigger an additional re-render
-    //    console.log('In Component Will Receive Props');
-    //},
+    componentWillUnmount: function(){
+        employeeStore.removeChangeListener(this._onStoreChange);
+    },
+    _onStoreChange: function(){
+        this.setState({
+            company: employeeStore.getCompany(),
+            employees: employeeStore.getEmployees()
+        });
+    },
     render: function() {
         return (
             <div>
@@ -48,9 +47,10 @@ var EmployeeContainer = React.createClass({
         })
     },
     _addNewEmployee: function(){
-        if(this._isInputValid(this.state.newEmployee)){
+        if(this._isInputValid()){
+            employeeActions.addEmployee(this.state.newEmployee);
             this.setState({
-                employees: this.state.employees.concat(this.state.newEmployee),
+                //employees: this.state.employees.concat(this.state.newEmployee),
                 newEmployee: ''
             })
         }

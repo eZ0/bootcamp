@@ -1,27 +1,37 @@
 var React = require('react');
+var ReactRouter = require('react-router');
+var Link = ReactRouter.Link;
 
 var UserList = React.createClass({
     render: function(){
+        if(this.props.users.length < 1){
+            return (<p>Oops! no users:[ </p>);
+        }
         return (
-            <table className='table table-condensed'>
-                <thead>
-                <tr>
-                    <th>id</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Age</th>
-                    <th>Birthday</th>
-                    <th>Married</th>
-                </tr>
-                </thead>
-                <tbody>
-                {this._renderUsers()}
-                </tbody>
-            </table>
+            <div>
+                <button className="btn btn-success"><Link name='add' to="/users/add">Add New User</Link></button>
+                <table className='table table-condensed'>
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Age</th>
+                        <th>Birthday</th>
+                        <th>Married</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {this._renderUsers()}
+                    </tbody>
+                </table>
+            </div>
         )
     },
     _renderUsers: function(){
         var self = this;
+
         return this.props.users.map(function(user, index){
             return (
                 <tr>
@@ -31,6 +41,10 @@ var UserList = React.createClass({
                     <td>{user.age}</td>
                     <td>{user.birthday}</td>
                     <td>{self._renderStatus(user.married)}</td>
+                    <td>
+                        <button className="btn btn-danger btn-xs" onClick={self.props.onRemove.bind(null, user.id)}>Delete</button>
+                        <button className="btn btn-primary btn-xs" onClick={self.props.onEdit.bind(null, user.id)}>Edit</button>
+                    </td>
                 </tr>
             )
         })
