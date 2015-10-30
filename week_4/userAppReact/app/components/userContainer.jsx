@@ -16,6 +16,7 @@ var UserContainer = React.createClass({
     // Invoked once after the first render
     componentDidMount: function(){
         // You now have access to this.getDOMNode()
+
         userStore.addChangeListener(this._onStoreChange);
     },
     componentWillUnmount: function(){

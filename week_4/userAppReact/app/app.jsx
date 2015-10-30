@@ -6,17 +6,20 @@ var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 var IndexRoute = ReactRouter.IndexRoute;
 
-//ReactDOM.render(<UserContainer />, document.getElementById('app'));
-
 var Home = require('./components/home.jsx');
 var UserContainer = require('./components/UserContainer.jsx');
 var Navbar = require('./components/navbar.jsx');
 var AddUser = require('./components/userAdd.jsx');
 var EditUser = require('./components/userEdit.jsx');
 
+var userActions = require('./actions/useraction');
+
 var createBrowserHistory = require('history/lib/createBrowserHistory');
 
 var App = React.createClass({
+    componentDidMount: function() {
+        userActions.getUsers();
+    },
     render: function(){
         return (
             <div>

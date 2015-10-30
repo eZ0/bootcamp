@@ -1,36 +1,31 @@
 var objectAssign = require('react/lib/Object.assign');
 var EventEmitter = require('events').EventEmitter; //custom events uitsturen, node module
 var appDispatcher = require('../appDispatcher.js');
-var _ = require('underscore');
+//var _ = require('underscore');
+var _ = require('lodash');
+
 
 /* DATA storage */
-var users = [
-        {
-            id: 1,
-            name: "Frederik",
-            email: "frederik.bouillon@euri.com",
-            age: 28,
-            birthday: "16/04/1987",
-            married: false
-        },
-        {
-            id: 2,
-            name: "Peter",
-            email: "peter.cosemans@euri.com",
-            age: 51,
-            birthday: "06/10/1964",
-            married: true
-        }
-    ];
+var users = [];
 
 /* Setter methods */
 var addUser = function(user){
     users.push(user);
 };
 
-var removeUser = function(userid){
-    var user = _.findWhere(users, {id: userid});
+var removeUser = function(user){
+    var user = _.findWhere(users, {id: user.id});
     users = _.without(users, user);
+};
+
+var getUsers = function(data){
+    users = data;
+};
+
+var editUser = function(user){
+    var id = user.id;
+    var index = _.findIndex(users, {id: id});
+    users[index] = user;
 };
 
 
@@ -43,11 +38,11 @@ var storeUser =  objectAssign({}, EventEmitter.prototype,{
         this.removeListener('CHANGE_EVENT', cb);
     },
     getUsers: function(){
-        return users;
+        return _.cloneDeep(users);
     },
-    getUser: function(userid){
-        var user = _.findWhere(users, {id: Number(userid)});
-        return user;
+    getUser: function(user){
+        var user = _.findWhere(users, {id: Number(user.id)});
+        return _.cloneDeep(user);
     }
 });
 
@@ -65,6 +60,11 @@ appDispatcher.register(function(payload){
             storeUser.emit('CHANGE_EVENT');
             break;
         case 'EDIT_USER':
+            editUser(action.data);
+            storeUser.emit('CHANGE_EVENT');
+            break;
+        case 'USERS_LOADED':
+            getUsers(action.data);
             storeUser.emit('CHANGE_EVENT');
             break;
         default:

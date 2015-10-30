@@ -22,13 +22,6 @@ module.exports = {
             test: /\.jsx$/,
             loaders: ['react-hot', 'babel'],
             include: path.join(__dirname, 'app')
-        },
-            {
-                //tell webpack to use jsx-loader for all *.jsx files
-                test: /\.js$/,
-                loaders: ['babel'],
-                include: path.join(__dirname, 'app')
-            }
-        ]
+        }]
     }
 };

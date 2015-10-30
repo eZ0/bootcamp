@@ -2,14 +2,26 @@ var objectAssign = require('react/lib/Object.assign');
 var EventEmitter = require('events').EventEmitter;
 var appDispatcher = require('../appDispatcher.js');
 
+var userStore = require('../stores/userstore.js');
+
+
 /* Setter methods */
-var count = 2;
+var count;
+
 var decrement = function(){
     count = count-1;
 };
 var increment = function(){
     count = count+1;
 };
+
+var setUserCounter = function(users){
+    if (users) {
+        count = users.length;
+    }
+
+};
+
 
 /* Store definition */
 var UserCounterStore =  objectAssign({}, EventEmitter.prototype,{
@@ -35,6 +47,10 @@ appDispatcher.register(function(payload) {
             break;
         case 'REMOVE_USER':
             decrement();
+            UserCounterStore.emit('CHANGE_EVENT');
+            break;
+        case 'USERS_LOADED':
+            setUserCounter(action.data);
             UserCounterStore.emit('CHANGE_EVENT');
             break;
         default:

@@ -2,6 +2,9 @@ var React = require('react');
 var ReactRouter = require('react-router');
 var Link = ReactRouter.Link;
 
+var userStore = require('../stores/userstore.js');
+var userAction = require('../actions/useraction.js');
+
 var userCounterStore = require('../stores/userCounterStore.js');
 
 var navBar = React.createClass({
@@ -14,6 +17,7 @@ var navBar = React.createClass({
     // Invoked once after the first render
     componentDidMount: function(){
         // You now have access to this.getDOMNode()
+
         userCounterStore.addChangeListener(this._onStoreChange);
     },
     componentWillUnmount: function(){

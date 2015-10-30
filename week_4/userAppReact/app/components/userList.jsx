@@ -42,8 +42,8 @@ var UserList = React.createClass({
                     <td>{user.birthday}</td>
                     <td>{self._renderStatus(user.married)}</td>
                     <td>
-                        <button className="btn btn-danger btn-xs" onClick={self.props.onRemove.bind(null, user.id)}>Delete</button>
-                        <button className="btn btn-primary btn-xs" onClick={self.props.onEdit.bind(null, user.id)}>Edit</button>
+                        <button className="btn btn-danger btn-xs" onClick={self.props.onRemove.bind(null, user)}>Delete</button>
+                        <button className="btn btn-primary btn-xs" onClick={self.props.onEdit.bind(null, user)}>Edit</button>
                     </td>
                 </tr>
             )
