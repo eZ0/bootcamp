@@ -1,0 +1,34 @@
+.nav {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right:0;
+    background-color: #fff;
+}
+
+.nav__items {
+    list-style: none;
+    width: 100%;
+    float: right;
+}
+
+.nav__item {
+    display: inline-block;
+    padding: 10px;
+}
+
+.nav__item,
+.nav__logo {
+    text-decoration: none;
+    color: #fff;
+}
+
+.nav__logo {
+    float: left;
+}
+
+
+.nav__item:hover{
+    cursor: pointer;
+}

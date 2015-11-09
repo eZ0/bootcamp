@@ -1,0 +1,42 @@
+.user-review:nth-of-type(1){
+    margin-top: 40px;
+}
+
+.user-review {
+    border-bottom: 1px solid #999;
+    padding: 40px;
+    display: table;
+    width: 100%;
+}
+
+.user-review:nth-child(odd) .user-review__pic,
+.user-review:nth-child(odd) .user-review__txt{
+    float: right;
+    text-align: right;
+    top: 0%;
+    transform: translateY(0%);
+}
+.user-review:nth-child(odd) .user-review__txt {
+    margin-top: 25px;
+    margin-right: 20px;
+}
+
+
+.user-review__pic {
+    display: table-cell;
+    border-radius: 40px;
+    background-size: auto;
+    width: 80px;
+    height: 80px;
+    background-color: #F6931E;
+
+}
+
+.user-review__txt {
+    display: table-cell;
+    text-align: left;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 70%;
+}

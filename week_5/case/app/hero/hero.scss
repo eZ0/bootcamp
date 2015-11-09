@@ -1,0 +1,19 @@
+.hero {
+    display: table;
+    height: 100vh;
+    position: relative;
+    @include bg-image('http://www.dezondag.be/wp-content/uploads/2015/09/ewceaczxo2pgcd45fhau.jpg');
+}
+
+.hero::after {
+    content: '';
+    background-color: $primary-color-alpha;
+    @include absolutePos();
+}
+
+.hero__content {
+    display: table-cell;
+    position: relative;
+    vertical-align: middle;
+    z-index: 1;
+}

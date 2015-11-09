@@ -1,0 +1,27 @@
+@mixin bg-image($url) {
+  background: url($url) no-repeat fixed;
+  background-size: cover;
+  width: 100%;
+}
+
+@mixin absolutePos() {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+%generalMargin {
+  margin-top: 50px;
+  margin-right: 0;
+  margin-bottom: 50px;
+  margin-left: 0;
+}
+
+%generalPadding {
+  padding-top: 0;
+  padding-right: 10%;
+  padding-bottom: 0;
+  padding-left: 10%;
+}

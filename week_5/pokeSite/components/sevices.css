@@ -1,0 +1,26 @@
+.services {
+    padding-top: 40px;
+    display: table;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.services__item {
+    display: table-cell;
+    vertical-align: top;
+    width: 33%;
+    position: relative;
+    padding-top: 20px;
+}
+
+.services__item-txt{
+    margin: 20px 0px 40px 0px;
+}
+
+.services__item-link {
+    text-align:center;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}

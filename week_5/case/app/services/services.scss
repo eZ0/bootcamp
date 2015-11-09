@@ -1,0 +1,38 @@
+.services {
+    @extend %generalMargin;
+}
+
+.services__blocks {
+    box-sizing: border-box;
+    display: inline-block;
+    margin-top: 50px;
+    width: 100%;
+    @extend %generalPadding;
+}
+
+.service {
+    box-sizing: border-box;
+    float: left;
+    font-weight: 300;
+    padding: 10px;
+    text-align: center;
+    width: 33.33%;
+}
+
+.service__icon {
+    @extend %h1fontsize;
+}
+
+.service__title {
+    font-family: 'Oswald', sans-serif;
+    @extend %h2fontsize;
+}
+
+.service__text {
+    @extend %pfontsize;
+    margin: 15px 0;
+}
+
+.service__slogan {
+    color: $primary-color;
+}

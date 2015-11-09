@@ -1,0 +1,19 @@
+.careers {
+    display: table;
+    padding: 80px 0;
+    position: relative;
+    @include bg-image('http://www.dezondag.be/wp-content/uploads/2015/09/ewceaczxo2pgcd45fhau.jpg');
+}
+
+.careers::after {
+    content: '';
+    background-color: $primary-color-alpha;
+    @include absolutePos();
+}
+
+.careers__content {
+    display: table-cell;
+    position: relative;
+    vertical-align: middle;
+    z-index: $above-layer;
+}

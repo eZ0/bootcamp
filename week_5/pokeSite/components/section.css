@@ -1,0 +1,31 @@
+.section--image-bg {
+    background-image: url("https://snap-photos.s3.amazonaws.com/img-thumbs/960w/YRUO4LCSLB.jpg");
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    color: #fff;
+    /*-webkit-clip-path: polygon(50% 100%, 100% 50%, 50% 100%, 0% 50%);*/
+}
+
+.section--image-bg::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    content: '';
+    background: rgba(224, 146, 26, .5);
+    display: block;
+    z-index: 0;
+}
+
+
+.section:nth-child(even) .wrapper {
+    padding: 100px 300px 100px 300px;
+}
+
+.section {
+    position: relative;
+    text-align: center;
+    color: #666;
+}

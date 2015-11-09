@@ -1,0 +1,49 @@
+@import url(http://reset5.googlecode.com/hg/reset.min.css);
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,300);
+
+body {
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    line-height: 18px;
+    color: #666;
+    width: 100%;
+    margin: 0;
+}
+
+h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 3.8em;
+
+}
+
+h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 3em;
+}
+
+h3 {
+    font-weight: 300;
+    font-size: 1.4rem;
+    line-height: 1.6em;
+}
+
+a {
+    color: #F6931E;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+
+.bld {
+    font-weight: 700;
+}
+
+.nav::after,
+.services__item-txt::after,
+.services__item-pic::after {
+    clear: both;
+    content: "";
+    display: block;
+}
