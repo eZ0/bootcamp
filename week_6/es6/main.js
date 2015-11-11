@@ -3,6 +3,22 @@
 
 //**GENERATOR FUNCTION**
 
+//function *myGen() {
+//    var a = yield 11;
+//    var b = yield 21;
+//    var c = yield 13;
+//
+//    console.log(a,b,c);
+//}
+//
+//var iterator = myGen();
+//console.log(iterator.next());
+//console.log(iterator.next(1));
+//console.log(iterator.next(2));
+//console.log(iterator.next(3));
+
+
+
 //let users = ['peter', 'jan', 'wim', 'stijn', 'hans'];
 //
 //function *filter(data, cb){
